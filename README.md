@@ -5,7 +5,7 @@ This project created for Amadeus Case Study. In this project includes the follow
 * User registration and login with JWT authentication
 * Role-based authorization with Spring Security
 * Refresh token
-* Search recursive flight for finding transit or direct flight and order this flights by total price
+* Search recursive flight for finding transit or direct flights and order these flights by total price
 
 ## Technologies
 * Spring Boot 3.0
@@ -30,11 +30,11 @@ To build and run the project, follow these steps:
 
 ## Authorization
 
-Some of endpoints require authentication so firstly you need authentication key
-You can create User and get this user's token with /auth/register POST endpoint. This token have expire date so when token expire you will need get new token.
-This created user have USER role so you can't create or update airports or flight with that.
+Some of the endpoints require authentication, so you need authentication key firstly.
+You can create User and get this user's token with /auth/register POST endpoint. This token have expiration date so when token expire you will need get new token.
+This created user have USER role because of that you can't create or update airports or flight with that.
 If you want to get new token with know user you can use /auth/authenticate POST endpoint.
-Also there is predefined admin user. Username: admin, Password: admin. With this user you can create or modify flight and airports.
+Also, there is predefined admin user. Username: admin, Password: admin. With this user you can create or modify flight and airports.
 
 I generate a admin token which is never expire. You can integrate your application or browser with this token
 Never expire token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5NDM0NDQxMiwiZXhwIjo5MjIzMzcyMDM2ODU0Nzc1fQ.I1_IpYXGgzKra4uQ-l0Q-hEZRBuAJrmu0LwBxW2HgQw
@@ -42,9 +42,9 @@ Never expire token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5NDM0NDQ
 You must add request's header this token like below.
 Authorization: Bearer [$token]
 
-On swagger it will enough write only token in Authorization label.
+On swagger ui, it will enough write only token in Authorization label.
 
-## Before initialization these must known
+## Before initialization these have known
 Before application entirely start data.sql will run. This file insert 10 different airports. You must use these cities for searching.
 After that for testing run initialization event. This event create 1000 flights per day for now to 20 days later.You could change this value in application.properties. You must use these date for searching.
 
@@ -55,6 +55,7 @@ Max transit flight count is 2. You can change this value with application.proper
 
 ## Future Development
 
+* Token blacklist for logout
 * Add different sql provider like mysql or oracle.
 * Add Unit tests.
 * Create container and add this application for docker.
