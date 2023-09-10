@@ -23,8 +23,8 @@ To get started with this project, you will need to have the following installed 
 
 To build and run the project, follow these steps:
 
-* Build the project: mvn clean install
-* Run the project: mvn spring-boot:run
+* Build the project: `mvn clean install`
+* Run the project: `mvn spring-boot:run`
 
 -> The application will be available at http://localhost:8080.
 
@@ -37,7 +37,7 @@ If you want to get new token with know user you can use /auth/authenticate POST 
 Also, there is predefined admin user. Username: admin, Password: admin. With this user you can create or modify flight and airports.
 
 I generate a admin token which is never expire. You can integrate your application or browser with this token
-Never expire token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5NDM0NDQxMiwiZXhwIjo5MjIzMzcyMDM2ODU0Nzc1fQ.I1_IpYXGgzKra4uQ-l0Q-hEZRBuAJrmu0LwBxW2HgQw
+Never expire token: `eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5NDM0NDQxMiwiZXhwIjo5MjIzMzcyMDM2ODU0Nzc1fQ.I1_IpYXGgzKra4uQ-l0Q-hEZRBuAJrmu0LwBxW2HgQw`
 
 You must add request's header this token like below.
 Authorization: Bearer [$token]
