@@ -1,4 +1,3 @@
-;
 INSERT INTO Airport (ID, NAME, CITY) VALUES (NEXT VALUE FOR AIRPORT_ID_SEQ,'Istanbul Airport', 'Istanbul');
 INSERT INTO Airport (ID, NAME, CITY) VALUES (NEXT VALUE FOR AIRPORT_ID_SEQ,'Istanbul Sabiha Gokcen Airport', 'Istanbul');
 INSERT INTO Airport (ID, NAME, CITY) VALUES (NEXT VALUE FOR AIRPORT_ID_SEQ,'Charles de Gaulle Airport', 'Paris');

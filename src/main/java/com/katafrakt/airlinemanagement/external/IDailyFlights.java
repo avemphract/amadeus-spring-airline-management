@@ -7,6 +7,6 @@ import java.net.URISyntaxException;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-public interface DailyFlights {
+public interface IDailyFlights {
     List<CreateFlightRequest> getFlights(OffsetDateTime date) throws URISyntaxException, IOException, InterruptedException;
 }

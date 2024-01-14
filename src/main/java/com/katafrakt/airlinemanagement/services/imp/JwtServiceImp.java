@@ -1,5 +1,6 @@
-package com.katafrakt.airlinemanagement.services;
+package com.katafrakt.airlinemanagement.services.imp;
 
+import com.katafrakt.airlinemanagement.services.IJwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -7,6 +8,9 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.io.DecodingException;
 import io.jsonwebtoken.security.Keys;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -15,10 +19,13 @@ import java.util.*;
 import java.util.function.Function;
 
 @Component
-public class JwtService {
+public class JwtServiceImp implements IJwtService {
 
     //eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5NDM0NDQxMiwiZXhwIjo5MjIzMzcyMDM2ODU0Nzc1fQ.I1_IpYXGgzKra4uQ-l0Q-hEZRBuAJrmu0LwBxW2HgQw
-    private static final String SECRET_KEY = "009eb52553aaea68af220c7b46a1b0fc8dbdc785e1365fcd225c66d42337fad1";
+    @Value("${jwt.privateKey}") @Getter @Setter
+    private String SECRET_KEY;
+
+    @Override
     public String extractUsername(String token){
         try {
             return extractClaim(token, Claims::getSubject);
@@ -27,14 +34,17 @@ public class JwtService {
             return null;
         }
     }
-    public <T> T extractClaim(String token, Function<Claims,T> resolver){
+    @Override
+    public <T> T extractClaim(String token, Function<Claims, T> resolver){
         final Claims claims = extractAllClaims(token);
         return resolver.apply(claims);
     }
 
+    @Override
     public String generateToken(UserDetails userDetails){
         return generateToken(new HashMap<>(),userDetails);
     }
+    @Override
     public String generateToken(Map<String, Objects> extraClaims, UserDetails userDetails){
         return Jwts.builder()
                 .setClaims(extraClaims)
@@ -46,19 +56,23 @@ public class JwtService {
                 ;
     }
 
+    @Override
     public boolean isTokenValid(String token, UserDetails userDetails){
         final String username  = extractUsername(token);
         return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
     }
 
+    @Override
     public boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date(System.currentTimeMillis()));
     }
 
+    @Override
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
 
+    @Override
     public Claims extractAllClaims(String token){
         return Jwts
                 .parserBuilder()

@@ -1,8 +1,9 @@
 package com.katafrakt.airlinemanagement;
 
-import com.katafrakt.airlinemanagement.external.DailyFlights;
+import com.katafrakt.airlinemanagement.external.IDailyFlights;
 import com.katafrakt.airlinemanagement.models.requests.flight.CreateFlightRequest;
-import com.katafrakt.airlinemanagement.services.FlightService;
+import com.katafrakt.airlinemanagement.services.imp.FlightServiceImp;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,11 +18,10 @@ import java.time.OffsetDateTime;
 @Component
 @RequiredArgsConstructor
 public class InitializationEvent implements ApplicationListener<ContextRefreshedEvent> {
-    private final DailyFlights dailyFlights;
-    private final FlightService flightService;
-
-    @Value("${initializationEvent.dayCount}") @Setter
-    private Integer dayCount;
+    private final IDailyFlights dailyFlights;
+    private final FlightServiceImp flightService;
+    @Value("${initializationEvent.dayCount}") @Getter @Setter
+    private int dayCount;
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         for (int i = 0;i<dayCount;i++){

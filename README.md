@@ -26,8 +26,21 @@ To build and run the project, follow these steps:
 * Build the project: `mvn clean install`
 * Run the project: `mvn spring-boot:run`
 
--> The application will be available at http://localhost:8080.
+=> The application will be available at http://localhost:8080 <br/>
+=> You can access hs-database at http://localhost:8080/h2-console/ <br/>
+=> Swagger document UI will have accessed in http://localhost:8080/swagger-ui/index.html 
 
+## Initialize with docker
+
+To build and run the project, follow these steps:
+
+* Build the project: `mvn clean install`
+* Create an image from project: `docker build --build-arg JAR_FILE="target/*.jar" -t airlinemanagement .`
+* Deploy the image to container and run: `docker run airlinemanagement --p 8080:8080 .`
+
+=> The application will be available at http://localhost:8080 <br/>
+=> You can access hs-database at http://localhost:8080/h2-console/ <br/>
+=> Swagger document UI will have been running in http://localhost:8080/swagger-ui/index.html
 ## Authorization
 
 Some of the endpoints require authentication, so you need authentication key firstly.
@@ -36,7 +49,7 @@ This created user have USER role because of that you can't create or update airp
 If you want to get new token with know user you can use /auth/authenticate POST endpoint.
 Also, there is predefined admin user. Username: admin, Password: admin. With this user you can create or modify flight and airports.
 
-I generate a admin token which is never expire. You can integrate your application or browser with this token
+I generate a admin token which is never expire. You can integrate your application or use in your browser this token
 Never expire token: `eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5NDM0NDQxMiwiZXhwIjo5MjIzMzcyMDM2ODU0Nzc1fQ.I1_IpYXGgzKra4uQ-l0Q-hEZRBuAJrmu0LwBxW2HgQw`
 
 You must add request's header this token like below.
@@ -58,4 +71,3 @@ Max transit flight count is 2. You can change this value with application.proper
 * Token blacklist for logout
 * Add different sql provider like mysql or oracle.
 * Add Unit tests.
-* Create container and add this application for docker.

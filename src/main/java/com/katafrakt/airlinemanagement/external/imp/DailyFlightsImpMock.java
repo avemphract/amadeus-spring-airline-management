@@ -1,8 +1,13 @@
-package com.katafrakt.airlinemanagement.external;
+package com.katafrakt.airlinemanagement.external.imp;
 
+import com.katafrakt.airlinemanagement.external.IDailyFlights;
 import com.katafrakt.airlinemanagement.models.requests.flight.CreateFlightRequest;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Component;
 
 import java.time.OffsetDateTime;
@@ -11,9 +16,11 @@ import java.util.List;
 import java.util.Random;
 
 @Component
-public class DailyFlightsMock implements DailyFlights{
-    @Value("${dailyFlightsMock.randomGeneratedFlights}") @Setter
-    private Integer randomGeneratedFlights = 1000;
+@ConditionalOnProperty(value = "application.isTest", havingValue = "true", matchIfMissing = true)
+@RequiredArgsConstructor
+public class DailyFlightsImpMock implements IDailyFlights {
+    @Value("${dailyFlightsMock.randomGeneratedFlights}") @Getter @Setter
+    private Integer randomGeneratedFlights;
     private final Random rand = new Random();
 
     @Override
