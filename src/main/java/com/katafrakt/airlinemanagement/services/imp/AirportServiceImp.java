@@ -5,16 +5,22 @@ import com.katafrakt.airlinemanagement.models.requests.airport.CreateAirportRequ
 import com.katafrakt.airlinemanagement.models.requests.airport.UpdateAirportRequest;
 import com.katafrakt.airlinemanagement.repositories.IAirportRepository;
 import com.katafrakt.airlinemanagement.services.IAirportService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class AirportServiceImp implements IAirportService {
+    private static final Logger logger = LoggerFactory.getLogger(AirportServiceImp.class);
+
 
     private final IAirportRepository airportRepository;
     @Autowired

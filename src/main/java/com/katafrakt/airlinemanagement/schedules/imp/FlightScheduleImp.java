@@ -6,6 +6,7 @@ import com.katafrakt.airlinemanagement.schedules.IFlightSchedule;
 import com.katafrakt.airlinemanagement.services.IFlightService;
 import com.katafrakt.airlinemanagement.services.imp.FlightServiceImp;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Async;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.time.OffsetDateTime;
 
+@Slf4j
 @ConditionalOnProperty(value = "application.isTest", havingValue = "true", matchIfMissing = true)
 @EnableAsync
 @Component

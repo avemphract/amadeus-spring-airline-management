@@ -10,6 +10,7 @@ import io.jsonwebtoken.io.DecodingException;
 import io.jsonwebtoken.security.Keys;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,7 @@ import java.security.Key;
 import java.util.*;
 import java.util.function.Function;
 
+@Slf4j
 @Component
 public class JwtServiceImp implements IJwtService {
 
@@ -44,6 +46,7 @@ public class JwtServiceImp implements IJwtService {
     public String generateToken(UserDetails userDetails){
         return generateToken(new HashMap<>(),userDetails);
     }
+
     @Override
     public String generateToken(Map<String, Objects> extraClaims, UserDetails userDetails){
         return Jwts.builder()

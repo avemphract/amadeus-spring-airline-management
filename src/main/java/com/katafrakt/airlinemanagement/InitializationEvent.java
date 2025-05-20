@@ -1,5 +1,6 @@
 package com.katafrakt.airlinemanagement;
 
+import com.katafrakt.airlinemanagement.configurations.aop.DurationLoggable;
 import com.katafrakt.airlinemanagement.external.IDailyFlights;
 import com.katafrakt.airlinemanagement.models.requests.flight.CreateFlightRequest;
 import com.katafrakt.airlinemanagement.services.imp.FlightServiceImp;
@@ -18,10 +19,16 @@ import java.time.OffsetDateTime;
 @Component
 @RequiredArgsConstructor
 public class InitializationEvent implements ApplicationListener<ContextRefreshedEvent> {
+
+    @Getter
+    private static boolean initializationCompleted = false;
     private final IDailyFlights dailyFlights;
     private final FlightServiceImp flightService;
     @Value("${initializationEvent.dayCount}") @Getter @Setter
     private int dayCount;
+
+
+    @DurationLoggable
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         for (int i = 0;i<dayCount;i++){
@@ -33,5 +40,6 @@ public class InitializationEvent implements ApplicationListener<ContextRefreshed
                 throw new RuntimeException(e);
             }
         }
+        initializationCompleted = true;
     }
 }

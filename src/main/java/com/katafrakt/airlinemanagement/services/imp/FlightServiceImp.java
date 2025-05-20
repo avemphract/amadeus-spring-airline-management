@@ -1,5 +1,6 @@
 package com.katafrakt.airlinemanagement.services.imp;
 
+import com.katafrakt.airlinemanagement.configurations.aop.DurationLoggable;
 import com.katafrakt.airlinemanagement.models.entities.Flight;
 import com.katafrakt.airlinemanagement.models.requests.flight.CreateFlightRequest;
 import com.katafrakt.airlinemanagement.models.requests.flight.UpdateFlightRequest;
@@ -15,12 +16,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.time.OffsetDateTime;
 import java.util.*;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class FlightServiceImp implements IFlightService {
+
     @Value("${flightService.maxTransferCount}") @Getter @Setter
     private int maxTransferCount;
     private final IFlightRepository flightRepository;
@@ -39,6 +44,7 @@ public class FlightServiceImp implements IFlightService {
     @Override
     public Flight updateFlight(UpdateFlightRequest updateFlightRequest) throws ResponseStatusException {
         Optional<Flight> optflight;
+
         try {
             optflight = flightRepository.findById(updateFlightRequest.getId());
         }
@@ -89,6 +95,7 @@ public class FlightServiceImp implements IFlightService {
         return flight;
     }
 
+    @DurationLoggable
     @Override
     public FlightSearchResponse search(String departureCity, String destinationCity, String beginDate, String returnDate) {
         List<FlightSearchResponse.FlightOption> departureFlights = new ArrayList<>();
