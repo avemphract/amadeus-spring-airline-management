@@ -52,6 +52,7 @@ public class WebSecurityConfiguration {
                         .requestMatchers(new AntPathRequestMatcher("/airport/**","POST")).hasRole("ADMIN")
                         .requestMatchers(new AntPathRequestMatcher("/airport/**","PUT")).hasRole("ADMIN")
                         .requestMatchers(new AntPathRequestMatcher("/airport/**")).authenticated()
+                        .requestMatchers(new AntPathRequestMatcher("/airport/*/*")).authenticated()
                         .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).hasRole("ADMIN")
                         .requestMatchers(new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/swagger-ui.html")).permitAll()

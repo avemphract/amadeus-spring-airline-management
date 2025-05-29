@@ -1,11 +1,13 @@
 package com.katafrakt.airlinemanagement.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @SequenceGenerator(name="AIRPORT_ID_SEQ",sequenceName="AIRPORT_ID_SEQ", allocationSize=1)
 @NoArgsConstructor
 @AllArgsConstructor

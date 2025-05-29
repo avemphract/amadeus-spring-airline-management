@@ -1,10 +1,13 @@
 package com.katafrakt.airlinemanagement.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.OffsetDateTime;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Schema(name = "Flight Model Documentation", description = "Model")
 @SequenceGenerator(name="FLIGHT_ID_SEQ",sequenceName="FLIGHT_ID_SEQ", allocationSize=1)
 @NoArgsConstructor
